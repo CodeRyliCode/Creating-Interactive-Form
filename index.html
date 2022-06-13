@@ -37,7 +37,7 @@
           
           
           <label for="title">Job Role</label>
-          <select id="title" name="user-title">
+          <select onchange="displayotherjobRole()" id="title" name="user-title">
             <option hidden>Select Job Role</option>
             <option value="full-stack js developer">Full Stack JavaScript Developer</option>
             <option value="front-end developer">Front End Developer</option>
@@ -66,7 +66,7 @@
 
             <div id="shirt-designs" class="shirt-designs">
               <label for="design">Design:</label>
-              <select id="design" name="user-design">
+              <select onchange="toggleColors()" id="design" name="user-design">
                 <option hidden>Select Theme</option>
                 <option value="js puns">Theme - JS Puns</option>
                 <option value="heart js">Theme - I &#9829; JS</option>
