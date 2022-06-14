@@ -21,6 +21,9 @@ function displayotherjobRole() {
 
 }
 
+//Disabling the T-shirt Color options by default
+const colorOptions= document.getElementById('color').setAttribute('disabled', 'disabled');
+
 
 
 
