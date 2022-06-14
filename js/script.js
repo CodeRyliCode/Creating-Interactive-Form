@@ -45,7 +45,6 @@ design.addEventListener("change", (event) => {
   }
 });
 
-
 /*using a change event listener to add and subtract costs
 of activities that are checked/unchecked and displaying total cost in real time*/
 const activities = document.getElementById("activities");
@@ -55,11 +54,34 @@ let totalCost = 0;
 activities.addEventListener("change", (event) => {
   dataCost = event.target.getAttribute("data-cost");
   dataCost = +dataCost;
-  if(event.target.checked == true) {
+  if (event.target.checked == true) {
     totalCost += dataCost;
   } else {
-totalCost -= dataCost;
+    totalCost -= dataCost;
   }
   activitiesCost.innerHTML = `Total: $${totalCost}`;
-  });
+});
+
+
+
+
+
+
+
+const creditCard = document.getElementById("credit-card");
+const paypal = document.getElementById("paypal");
+const bitcoin = document.getElementById("bitcoin");
+const payment = document.getElementById("payment");
+const labelPayment = payment.previousElementSibling;
+
+paypal.hidden = true;
+bitcoin.hidden = true;
+payment.firstElementChild.nextElementSibling.selected = true;
+
+// payment.addEventListener("change", (event) => {
+
+
+
+// });
+
 
