@@ -1,6 +1,7 @@
 //Default focus on name field when page first loads
+const name = document.getElementById("name");
 window.onload = function () {
-  document.getElementById("name").focus();
+  name.focus();
 };
 
 //Hiding other job role text field by default
@@ -62,44 +63,86 @@ activities.addEventListener("change", (event) => {
   activitiesCost.innerHTML = `Total: $${totalCost}`;
 });
 
-
-
-
-
-
 /*Showing the credit card option by default and hiding the bitcoin and paypal 
 option texts*/
 const creditCard = document.getElementById("credit-card");
 const paypal = document.getElementById("paypal");
 const bitcoin = document.getElementById("bitcoin");
 const payment = document.getElementById("payment");
-const labelPayment = payment.previousElementSibling;
 
 paypal.hidden = true;
 bitcoin.hidden = true;
 payment.firstElementChild.nextElementSibling.selected = true;
 
-
-
 /*using a change event listener and conditionals to display
 selected payment option when clicked and hide other options*/
 payment.addEventListener("change", (event) => {
-    const paymentOption = event.target.value;
-    console.log(paymentOption);
-    if (paymentOption === 'paypal') {
-        creditCard.hidden = true;
-        bitcoin.hidden = true;
-        paypal.hidden = false;
-      } else if (paymentOption === 'bitcoin'){
-        creditCard.hidden = true;
-        bitcoin.hidden = false;
-        paypal.hidden = true;
-      } else {
-        creditCard.hidden = false;
-        bitcoin.hidden = true;
-        paypal.hidden = true;
-      }
+  const paymentOption = event.target.value;
+  console.log(paymentOption);
+  if (paymentOption === "paypal") {
+    creditCard.hidden = true;
+    bitcoin.hidden = true;
+    paypal.hidden = false;
+  } else if (paymentOption === "bitcoin") {
+    creditCard.hidden = true;
+    bitcoin.hidden = false;
+    paypal.hidden = true;
+  } else {
+    creditCard.hidden = false;
+    bitcoin.hidden = true;
+    paypal.hidden = true;
+  }
+});
 
- });
 
 
+
+/*creating variables for elements we want to have validated. I am also 
+using regex to create tests to validate. I use the event listener to listen
+for a change in the submit and use conditionals to make sure my validation tests are all passed 
+so the form is able to submit. */
+const form = document.querySelector("form");
+const email = document.getElementById("email");
+const cardNumber = document.getElementById("cc-num");
+const zipCode = document.getElementById("zip");
+const cvv = document.getElementById("cvv");
+
+
+form.addEventListener("submit", (event) => {
+const nameField = name.value;
+const nameTest = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameField);
+
+const emailField = email.value;
+const emailTest = /^[^@]+@[^@]+\.com$/i.test(emailField);
+
+const activityTest = totalCost > 0;
+
+const paymentMethod = payment.value;
+const cardnumberField = cardNumber.value;
+const cardnumberTest = /^\d{13}\d?\d?\d?$/.test(cardnumberField);
+const zipcodeField = zipCode.value;
+const zipCodeTest= /^\d{5}$/.test(zipcodeField);
+const cvvField = cvv.value;
+const cvvTest = /^\d{3}$/.test(cvvField);
+
+
+if(!nameTest) {
+    event.preventDefault();
+} 
+
+if(!emailTest) {
+    event.preventDefault();
+} 
+
+if (!activityTest) {
+    event.preventDefault();
+}
+
+if (paymentMethod === 'credit-card') {
+    if (!cardnumberTest || !zipCodeTest || !cvvTest) {
+        event.preventDefault();
+    }
+}
+
+
+});
