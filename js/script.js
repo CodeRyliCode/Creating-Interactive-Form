@@ -33,6 +33,7 @@ design.addEventListener("change", (event) => {
   color.disabled = false;
   for (let i = 0; i < option.length; i++) {
     const eventTarget = event.target.value;
+    console.log(eventTarget);
     const dataTheme = option[i].getAttribute("data-theme");
     if (eventTarget === dataTheme) {
       option[i].hidden = false;
@@ -43,3 +44,22 @@ design.addEventListener("change", (event) => {
     }
   }
 });
+
+
+/*using a change event listener to add and subtract costs
+of activities that are checked/unchecked and displaying total cost in real time*/
+const activities = document.getElementById("activities");
+const activitiesCost = document.getElementById("activities-cost");
+let totalCost = 0;
+
+activities.addEventListener("change", (event) => {
+  dataCost = event.target.getAttribute("data-cost");
+  dataCost = +dataCost;
+  if(event.target.checked == true) {
+    totalCost += dataCost;
+  } else {
+totalCost -= dataCost;
+  }
+  activitiesCost.innerHTML = `Total: $${totalCost}`;
+  });
+
