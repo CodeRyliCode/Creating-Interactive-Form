@@ -21,11 +21,23 @@ function displayotherjobRole() {
 
 }
 
+
 //Disabling the T-shirt Color options by default
-const colorOptions= document.getElementById('color').setAttribute('disabled', 'disabled');
+const disableColor= document.getElementById('color').setAttribute('disabled', 'disabled');
 
 
 
+
+function toggleColors() {
+const designTheme = document.getElementById('design').value;
+const colorValues = document.getElementsByTagName('data-theme[heart js]');
+
+    if (designTheme == 'js puns')
+      document.getElementById('color').removeAttribute('disabled');
+        colorValues.style.display == 'none';
+    };
+
+  
 
 
 
