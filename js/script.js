@@ -23,7 +23,7 @@ const disableColor = document
   .getElementById("color")
   .setAttribute("disabled", "disabled");
 
-/*using a change event listener to target and loop through options
+/*using a change event listener to target and loop through options and set conditionals
 in order to show matching selected theme colors and hide other colors in the drop down menu*/
 const color = document.getElementById("color");
 const design = document.getElementById("design");
@@ -45,7 +45,7 @@ design.addEventListener("change", (event) => {
   }
 });
 
-/*using a change event listener to add and subtract costs
+/*using a change event listener and conditionals to add and subtract costs
 of activities that are checked/unchecked and displaying total cost in real time*/
 const activities = document.getElementById("activities");
 const activitiesCost = document.getElementById("activities-cost");
@@ -67,7 +67,8 @@ activities.addEventListener("change", (event) => {
 
 
 
-
+/*Showing the credit card option by default and hiding the bitcoin and paypal 
+option texts*/
 const creditCard = document.getElementById("credit-card");
 const paypal = document.getElementById("paypal");
 const bitcoin = document.getElementById("bitcoin");
@@ -78,10 +79,27 @@ paypal.hidden = true;
 bitcoin.hidden = true;
 payment.firstElementChild.nextElementSibling.selected = true;
 
-// payment.addEventListener("change", (event) => {
 
 
+/*using a change event listener and conditionals to display
+selected payment option when clicked and hide other options*/
+payment.addEventListener("change", (event) => {
+    const paymentOption = event.target.value;
+    console.log(paymentOption);
+    if (paymentOption === 'paypal') {
+        creditCard.hidden = true;
+        bitcoin.hidden = true;
+        paypal.hidden = false;
+      } else if (paymentOption === 'bitcoin'){
+        creditCard.hidden = true;
+        bitcoin.hidden = false;
+        paypal.hidden = true;
+      } else {
+        creditCard.hidden = false;
+        bitcoin.hidden = true;
+        paypal.hidden = true;
+      }
 
-// });
+ });
 
 
