@@ -1,45 +1,45 @@
 //Default focus on name field when page first loads
 window.onload = function () {
-    document.getElementById("name").focus();
-}
+  document.getElementById("name").focus();
+};
 
 //Hiding other job role text field by default
-const other = document.getElementById('other-job-role');
-other.style.display = 'none';
-
-
+const other = document.getElementById("other-job-role");
+other.style.display = "none";
 
 /*Function that uses conditional to check if user chooses 'other job role'. If so,
 the default hidden display for 'other job role' text field will be blocked and appear to the user. */
 function displayotherjobRole() {
-    const jobOption = document.getElementById('title').value;
-    if (jobOption == 'other') {
-        other.style.display = 'block';
-    } else {
-        other.style.display = 'none';
-    }
-
+  const jobOption = document.getElementById("title").value;
+  if (jobOption == "other") {
+    other.style.display = "block";
+  } else {
+    other.style.display = "none";
+  }
 }
 
+// Disabling the T-shirt Color options by default
+const disableColor = document
+  .getElementById("color")
+  .setAttribute("disabled", "disabled");
 
-//Disabling the T-shirt Color options by default
-const disableColor= document.getElementById('color').setAttribute('disabled', 'disabled');
+/*using a change event listener to target and loop through options
+in order to show matching selected theme colors and hide other colors in the drop down menu*/
+const color = document.getElementById("color");
+const design = document.getElementById("design");
+const option = color.children;
 
-
-
-
-function toggleColors() {
-const designTheme = document.getElementById('design').value;
-const colorValues = document.getElementsByTagName('data-theme[heart js]');
-
-    if (designTheme == 'js puns')
-      document.getElementById('color').removeAttribute('disabled');
-        colorValues.style.display == 'none';
-    };
-
-  
-
-
-
-
-
+design.addEventListener("change", (event) => {
+  color.disabled = false;
+  for (let i = 0; i < option.length; i++) {
+    const eventTarget = event.target.value;
+    const dataTheme = option[i].getAttribute("data-theme");
+    if (eventTarget === dataTheme) {
+      option[i].hidden = false;
+      option[i].selected = true;
+    } else {
+      option[i].hidden = true;
+      option[i].selected = false;
+    }
+  }
+});
