@@ -152,13 +152,13 @@ if(!emailTest) {
 
 if (!activityTest) {
     event.preventDefault();
-    activitiesLabel.classList.add("not-valid");
-    activitiesLabel.classList.remove("valid");
+    activities.classList.add("not-valid");
+    activities.classList.remove("valid");
     activities.lastElementChild.style.display = "block";
 
 } else if (activityTest) {
-    activitiesLabel.classList.add("valid");
-    activitiesLabel.classList.remove("not-valid");
+    activities.classList.add("valid");
+    activities.classList.remove("not-valid");
     activities.lastElementChild.style.display = "none";
 
 }
@@ -193,7 +193,7 @@ if (paymentMethod === 'credit-card') {
 function validationPass(element){
     element.parentElement.classList.add("valid");
     element.parentElement.classList.remove("not-valid");
-    element.parentElement.lastElementChild.style.display = "none";
+ element.parentElement.lastElementChild.style.display = "none";
 }
 
 function validationFail(element) {
