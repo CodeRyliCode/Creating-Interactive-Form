@@ -97,46 +97,71 @@ payment.addEventListener("change", (event) => {
 
 
 
-/*creating variables for elements we want to have validated. I am also 
-using regex to create tests to validate. I use the event listener to listen
-for a change in the submit and use conditionals to make sure my validation tests are all passed 
-so the form is able to submit. */
+//variable to target form element for the submit event listener
 const form = document.querySelector("form");
-const email = document.getElementById("email");
-const cardNumber = document.getElementById("cc-num");
-const zipCode = document.getElementById("zip");
-const cvv = document.getElementById("cvv");
 
-
+/*I use the event listener to listen
+for a change in the submit and use conditionals to make sure my validation tests are all passed 
+so the form is able to submit if all tests passed. 
+*/
 form.addEventListener("submit", (event) => {
+
 const nameField = name.value;
 const nameTest = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameField);
 
+const email = document.getElementById("email");
 const emailField = email.value;
 const emailTest = /^[^@]+@[^@]+\.com$/i.test(emailField);
 
+const activitiesBox = document.getElementById("activities-box");
+const activitiesLabel = activitiesBox.previousElementSibling;
 const activityTest = totalCost > 0;
 
 const paymentMethod = payment.value;
+
+const cardNumber = document.getElementById("cc-num");
 const cardnumberField = cardNumber.value;
 const cardnumberTest = /^\d{13}\d?\d?\d?$/.test(cardnumberField);
+
+const zipCode = document.getElementById("zip");
 const zipcodeField = zipCode.value;
 const zipCodeTest= /^\d{5}$/.test(zipcodeField);
+
+const cvv = document.getElementById("cvv");
 const cvvField = cvv.value;
 const cvvTest = /^\d{3}$/.test(cvvField);
 
 
+
+/*If input is not entered correctly, error message will appear, error triangle is added, and valid checkbox is removed. 
+If input is entered correctly, error message is not displayed, valid checkbox is added, and not valid triangle is removed.  */
 if(!nameTest) {
     event.preventDefault();
-} 
+    validationFail(name);
+} else {
+    validationPass(name);
+}
 
 if(!emailTest) {
     event.preventDefault();
+    validationFail(email);
+} else {
+    validationPass(email);
 } 
 
 if (!activityTest) {
     event.preventDefault();
+    activitiesLabel.classList.add("not-valid");
+    activitiesLabel.classList.remove("valid");
+    activities.lastElementChild.style.display = "block";
+
+} else if (activityTest) {
+    activitiesLabel.classList.add("valid");
+    activitiesLabel.classList.remove("not-valid");
+    activities.lastElementChild.style.display = "none";
+
 }
+
 
 if (paymentMethod === 'credit-card') {
     if (!cardnumberTest || !zipCodeTest || !cvvTest) {
@@ -146,3 +171,29 @@ if (paymentMethod === 'credit-card') {
 
 
 });
+
+// Accessibility - helper functions I use with name and email elements to test validation in the form submit event listener
+function validationPass(element){
+    element.parentElement.classList.add("valid");
+    element.parentElement.classList.remove("not-valid");
+    element.parentElement.lastElementChild.style.display = "none";
+}
+
+function validationFail(element) {
+    element.parentElement.classList.add("not-valid");
+    element.parentElement.classList.remove("valid");
+    element.parentElement.lastElementChild.style.display = "block";  
+}
+
+
+
+// Accessibility - adds focus to the activities checkboxes
+let checkboxes = document.querySelectorAll('input[type=checkbox]');
+for (let i=0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener('focus', (e) => {
+        checkboxes[i].parentElement.classList = "focus";
+    });
+    checkboxes[i].addEventListener('blur', (e) => {
+        checkboxes[i].parentElement.classList.remove("focus");
+    });
+}
