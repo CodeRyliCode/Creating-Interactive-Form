@@ -112,10 +112,8 @@ const nameTest = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameField);
 
 const email = document.getElementById("email");
 const emailField = email.value;
-const emailTest = /^[^@]+@[^@]+\.com$/i.test(emailField);
+const emailTest = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(emailField);
 
-const activitiesBox = document.getElementById("activities-box");
-const activitiesLabel = activitiesBox.previousElementSibling;
 const activityTest = totalCost > 0;
 
 const paymentMethod = payment.value;
