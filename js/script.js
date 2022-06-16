@@ -8,16 +8,17 @@ window.onload = function () {
 const other = document.getElementById("other-job-role");
 other.style.display = "none";
 
-/*Function that uses conditional to check if user chooses 'other job role'. If so,
-the default hidden display for 'other job role' text field will be blocked and appear to the user. */
-function displayotherjobRole() {
-  const jobOption = document.getElementById("title").value;
-  if (jobOption == "other") {
+/* event change listener that uses conditional to check if user chooses 'other job role'. If so,
+the default hidden display for 'other job role' text field will be blocked and the other job role text field appears to the user. */
+const jobOption = document.getElementById("title");
+jobOption.addEventListener("change", (event) => {
+   const jobValue = event.target.value;
+    if (jobValue == "other") {
     other.style.display = "block";
   } else {
     other.style.display = "none";
   }
-}
+});
 
 // Disabling the T-shirt Color options by default
 const disableColor = document
