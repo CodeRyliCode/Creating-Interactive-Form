@@ -125,7 +125,7 @@ const cardnumberTest = /^\d{13}\d?\d?\d?$/.test(cardnumberField);
 
 const zipCode = document.getElementById("zip");
 const zipcodeField = zipCode.value;
-const zipCodeTest= /^\d{5}$/.test(zipcodeField);
+const zipcodeTest= /^\d{5}$/.test(zipcodeField);
 
 const cvv = document.getElementById("cvv");
 const cvvField = cvv.value;
@@ -164,15 +164,31 @@ if (!activityTest) {
 
 
 if (paymentMethod === 'credit-card') {
-    if (!cardnumberTest || !zipCodeTest || !cvvTest) {
+    if (!cardnumberTest || !zipcodeTest || !cvvTest) {
         event.preventDefault();
     }
+    if (!cardnumberTest) {
+        validationFail(cardNumber);
+    } else {
+        validationPass(cardNumber);
+    }
+    if (!zipcodeTest) {
+        validationFail(zipCode);
+    } else {
+        validationPass(zipCode);
+    }
+    if (!cvvTest) {
+        validationFail(cvv);
+    } else {
+        validationPass(cvv);
+    }
+    
 }
 
 
 });
 
-// Accessibility - helper functions I use with name and email elements to test validation in the form submit event listener
+// Accessibility - helper functions I use with name, email, and credit card elements to test validation in the form submit event listener
 function validationPass(element){
     element.parentElement.classList.add("valid");
     element.parentElement.classList.remove("not-valid");
